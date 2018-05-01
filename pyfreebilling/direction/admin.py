@@ -23,6 +23,9 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.admin import ImportExportModelAdmin
 
+from django_countries.fields import CountryField
+from django_countries.widgets import CountrySelectWidget
+
 from .models import Destination, Prefix, Carrier, Region, Country, Type
 
 
@@ -38,6 +41,7 @@ class DestinationAdminForm(forms.ModelForm):
     class Meta:
         model = Destination
         fields = '__all__'
+        widgets = {'country_iso2': CountrySelectWidget()}
 
 
 class DestinationAdmin(ImportExportMixin, admin.ModelAdmin):
@@ -132,6 +136,7 @@ class CountryAdminForm(forms.ModelForm):
     class Meta:
         model = Country
         fields = '__all__'
+        widgets = {'country_iso2': CountrySelectWidget()}
 
 
 class CountryAdmin(ImportExportMixin, admin.ModelAdmin):

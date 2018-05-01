@@ -77,6 +77,56 @@ class Type(models.Model):
         return reverse('direction_type_update', args=(self.slug,))
 
 
+class Region(models.Model):
+
+    # Fields
+    name = models.CharField(_(u"region name"), max_length=255, unique=True)
+    slug = extension_fields.AutoSlugField(populate_from='name', blank=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+
+    class Meta:
+        db_table = 'dest_region'
+        app_label = 'direction'
+        ordering = ('name',)
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('direction_region_detail', args=(self.slug,))
+
+    def get_update_url(self):
+        return reverse('direction_region_update', args=(self.slug,))
+
+
+class Country(models.Model):
+
+    # Fields
+    country_iso2 = CountryField(_(u"country"), unique=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+
+    # Relationship Fields
+    region = models.ForeignKey(Region,
+        verbose_name=_(u"region"), on_delete=models.SET_NULL, blank=True, null=True,
+    )
+
+    class Meta:
+        db_table = 'dest_country'
+        app_label = 'direction'
+        ordering = ('country_iso2',)
+
+    def __unicode__(self):
+        return u'%s' % self.country_iso2.name
+
+    def get_absolute_url(self):
+        return reverse('direction_country_detail', args=(self.pk,))
+
+    def get_update_url(self):
+        return reverse('direction_country_update', args=(self.pk,))
+
+
 class Destination(models.Model):
 
     # Fields
@@ -84,9 +134,16 @@ class Destination(models.Model):
     slug = extension_fields.AutoSlugField(populate_from='name', blank=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
-    country_iso2 = CountryField(_(u"country"), blank=True)
+    # country_iso2 = CountryField(_(u"country"), blank=True)
 
     # Relationship Fields
+    country_iso2 = models.ForeignKey(Country,
+        verbose_name=_(u"country"),
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        to_field='country_iso2',
+    )
     carrier = models.ForeignKey(Carrier,
         verbose_name=_(u"carrier"), on_delete=models.PROTECT
     )
@@ -135,53 +192,3 @@ class Prefix(models.Model):
 
     def get_update_url(self):
         return reverse('direction_prefix_update', args=(self.slug,))
-
-
-class Region(models.Model):
-
-    # Fields
-    name = models.CharField(_(u"region name"), max_length=255, unique=True)
-    slug = extension_fields.AutoSlugField(populate_from='name', blank=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    last_updated = models.DateTimeField(auto_now=True, editable=False)
-
-    class Meta:
-        db_table = 'dest_region'
-        app_label = 'direction'
-        ordering = ('name',)
-
-    def __unicode__(self):
-        return u'%s' % self.name
-
-    def get_absolute_url(self):
-        return reverse('direction_region_detail', args=(self.slug,))
-
-    def get_update_url(self):
-        return reverse('direction_region_update', args=(self.slug,))
-
-
-class Country(models.Model):
-
-    # Fields
-    country_iso2 = CountryField(_(u"country"), unique=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    last_updated = models.DateTimeField(auto_now=True, editable=False)
-
-    # Relationship Fields
-    region = models.ForeignKey(Region,
-        verbose_name=_(u"region"), on_delete=models.SET_NULL, blank=True, null=True,
-    )
-
-    class Meta:
-        db_table = 'dest_country'
-        app_label = 'direction'
-        ordering = ('country_iso2',)
-
-    def __unicode__(self):
-        return u'%s' % self.pk
-
-    def get_absolute_url(self):
-        return reverse('direction_country_detail', args=(self.pk,))
-
-    def get_update_url(self):
-        return reverse('direction_country_update', args=(self.pk,))

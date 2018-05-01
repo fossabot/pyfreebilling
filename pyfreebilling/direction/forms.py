@@ -1,6 +1,8 @@
 from django import forms
 from .models import Destination, Prefix, Carrier, Region, Country, Type
 
+from django_countries.fields import CountryField
+
 
 class DestinationForm(forms.ModelForm):
     class Meta:
