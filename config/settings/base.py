@@ -97,6 +97,7 @@ THIRD_PARTY_APPS = (
     'solo',
     'django_filters',
     'migrate_sql',
+    'bootstrap_daterangepicker',
     'currencies', # A virer
 )
 
@@ -114,6 +115,7 @@ PROJECT_APPS = (
     'pyfreebilling.accounting.apps.AccountingConfig',
     'pyfreebilling.endpoint.apps.EndpointConfig',
     'pyfreebilling.direction.apps.DirectionConfig',
+    'pyfreebilling.rate.apps.RateConfig',
 )
 
 EXTENSION_APPS = (

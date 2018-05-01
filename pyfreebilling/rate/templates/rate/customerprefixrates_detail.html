@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'rate_customerprefixrates_list' %}">CustomerPrefixRates Listing</a></p>
+<table class="table">
+<tr><td>created</td><td>{{ object.created }}</td></tr>
+<tr><td>last_updated</td><td>{{ object.last_updated }}</td></tr>
+<tr><td>prefix</td><td>{{ object.prefix }}</td></tr>
+<tr><td>destnum_length</td><td>{{ object.destnum_length }}</td></tr>
+<tr><td>cr_rate</td><td>{{ object.cr_rate }}</td></tr>
+<tr><td>cr_block_min_duration</td><td>{{ object.cr_block_min_duration }}</td></tr>
+<tr><td>cr_minimal_time</td><td>{{ object.cr_minimal_time }}</td></tr>
+<tr><td>cr_init_block</td><td>{{ object.cr_init_block }}</td></tr>
+<tr><td>status</td><td>{{ object.status }}</td></tr>
+<tr><td>match_type</td><td>{{ object.match_type }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit CustomerPrefixRates</a>
+
+{% endblock %}

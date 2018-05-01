@@ -9,7 +9,7 @@
 argon2-cffi==18.1.0       # via django
 asn1crypto==0.24.0        # via cryptography
 bcrypt==3.1.4
-certifi==2018.1.18        # via requests
+certifi==2018.4.16        # via requests
 cffi==1.11.5              # via argon2-cffi, bcrypt, cryptography
 chardet==3.0.4            # via requests
 cryptography==2.2.2       # via pyopenssl
@@ -18,6 +18,7 @@ django-admin-honeypot==1.0.0
 django-admin-tools==0.8.1
 django-appconf==1.0.2     # via django-axes
 django-axes==4.1.0
+django-bootstrap-daterangepicker==1.0.1
 django-bootstrap-pagination==1.6.4
 django-bootstrap3==9.1.0
 django-braces==1.12.0
@@ -30,10 +31,11 @@ django-debug-toolbar==1.9.1
 django-extensions==2.0.6
 django-filter==1.1.0
 django-import-export==1.0.0
-django-ipware==2.0.1      # via django-axes
+django-ipware==2.1.0      # via django-axes
 django-mathfilters==0.4.0
 django-migrate-sql==0.1.1
 django-model-utils==3.1.1
+django-partial-index==0.4.0
 django-qsstats-magic==1.0.0
 django-queryset-csv==1.0.0
 django-render-block==0.5  # via django-templated-email
@@ -47,21 +49,21 @@ feedparser==5.2.1
 FreeSWITCH-ESL-Python==1.2
 futures==3.2.0            # via requests-futures
 idna==2.6                 # via cryptography, requests
-ipaddress==1.0.19         # via cryptography
-jdcal==1.3                # via openpyxl
+ipaddress==1.0.22         # via cryptography
+jdcal==1.4                # via openpyxl
 Markdown==2.6.11
 netaddr==0.7.19
 netifaces==0.10.6
 odfpy==1.3.6              # via tablib
-openpyxl==2.5.2           # via tablib
+openpyxl==2.5.3           # via tablib
 piprot==0.9.7
 psutil==5.4.3
 psycopg2==2.7.4
 pycparser==2.18           # via cffi
 pyOpenSSL==17.5.0
-python-dateutil==2.7.2    # via django-chroniker
+python-dateutil==2.7.2    # via django-bootstrap-daterangepicker, django-chroniker
 python-slugify==1.2.5     # via transifex-client
-python-stdnum==1.8.1      # via vatnumber
+python-stdnum==1.9        # via vatnumber
 pytz==2018.03
 pyyaml==3.12              # via tablib
 requests-futures==0.9.7   # via piprot

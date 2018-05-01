@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'rate_rate_list' %}">Rate Listing</a></p>
+<table class="table">
+<tr><td>r_rate</td><td>{{ object.r_rate }}</td></tr>
+<tr><td>r_block_min_duration</td><td>{{ object.r_block_min_duration }}</td></tr>
+<tr><td>r_minimal_time</td><td>{{ object.r_minimal_time }}</td></tr>
+<tr><td>r_init_block</td><td>{{ object.r_init_block }}</td></tr>
+<tr><td>status</td><td>{{ object.status }}</td></tr>
+<tr><td>date_validity</td><td>{{ object.date_validity }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit Rate</a>
+
+{% endblock %}

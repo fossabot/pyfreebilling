@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'rate_customerrate_list' %}">CustomerRate Listing</a></p>
+<table class="table">
+<tr>
+<td>ID</td><td>Link</td>
+    <td>created</td>
+    <td>last_updated</td>
+    <td>prefix</td>
+    <td>destnum_length</td>
+    <td>cr_rate</td>
+    <td>cr_block_min_duration</td>
+    <td>cr_minimal_time</td>
+    <td>cr_init_block</td>
+    <td>status</td>
+    <td>match_type</td>
+</tr>
+{% for object in object_list %}
+<tr>
+    <td>{{object.pk}}</td>
+    <td><a href="{{object.get_absolute_url}}">{{object}}</a></td>
+    <td>{{ object.created }}</td>
+    <td>{{ object.last_updated }}</td>
+    <td>{{ object.prefix }}</td>
+    <td>{{ object.destnum_length }}</td>
+    <td>{{ object.cr_rate }}</td>
+    <td>{{ object.cr_block_min_duration }}</td>
+    <td>{{ object.cr_minimal_time }}</td>
+    <td>{{ object.cr_init_block }}</td>
+    <td>{{ object.status }}</td>
+    <td>{{ object.match_type }}</td>
+</tr>
+{% endfor %}
+</table><a class="btn btn-primary" href="{% url 'rate_customerrate_create' %}">Create new CustomerRate</a>
+{% endblock %}

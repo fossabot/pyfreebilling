@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'rate_customerratecard_list' %}">CustomerRatecard Listing</a></p>
+<table class="table">
+<tr><td>slug</td><td>{{ object.slug }}</td></tr>
+<tr><td>rc_type</td><td>{{ object.rc_type }}</td></tr>
+<tr><td>name</td><td>{{ object.name }}</td></tr>
+<tr><td>description</td><td>{{ object.description }}</td></tr>
+<tr><td>date_validity</td><td>{{ object.date_validity }}</td></tr>
+<tr><td>status</td><td>{{ object.status }}</td></tr>
+<tr><td>status_changed</td><td>{{ object.status_changed }}</td></tr>
+<tr><td>created</td><td>{{ object.created }}</td></tr>
+<tr><td>modified</td><td>{{ object.modified }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit CustomerRatecard</a>
+
+{% endblock %}

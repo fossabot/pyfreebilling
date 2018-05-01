@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New coutntry / directions / prefix matching process
 
 ### Changed
+- Ratecards / rates management enhanced. New a migration from old system !
 
 
 ### Deprecated

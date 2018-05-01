@@ -36,6 +36,12 @@ django-admin-tools==0.8.1
 # py3
 django-axes==4.1.0
 
+# Date range selector
+# https://github.com/jckw/django-bootstrap-daterangepicker/
+# MIT
+# py3
+django-bootstrap-daterangepicker==1.0.1
+
 # bootstrap pagination
 # https://github.com/jmcclell/django-bootstrap-pagination/
 # Bootstrap 3.x only
@@ -133,6 +139,13 @@ django-qsstats-magic==1.0.0
 # py3
 django-queryset-csv==1.0.0
 
+# Postgresql partial indexes
+# https://github.com/mattiaslinnap/django-partial-index
+# BSD3
+# py3
+# PG 9.6 min
+django-partial-index==0.4.0
+
 # Helps working with singletons
 # https://github.com/lazybird/django-solo
 # Creative Commons Attribution 3.0 Unported
@@ -154,7 +167,7 @@ django-templated-email==2.2.0
 
 # get feed
 # https://github.com/kurtmckee/feedparser/
-# permisive
+# permissive
 # py3
 feedparser==5.2.1
 

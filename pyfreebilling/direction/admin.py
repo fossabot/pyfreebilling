@@ -23,8 +23,6 @@ from import_export import resources
 from import_export.admin import ImportExportMixin
 from import_export.admin import ImportExportModelAdmin
 
-import easy
-
 from .models import Destination, Prefix, Carrier, Region, Country, Type
 
 
