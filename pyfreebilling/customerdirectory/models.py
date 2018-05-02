@@ -23,6 +23,8 @@ import re
 import random
 import string
 
+from partial_index import PartialIndex
+
 from pyfreebilling.pyfreebill.models import Company
 from pyfreebilling.pyfreebill.validators import validate_cidr
 
@@ -268,6 +270,12 @@ class CustomerDirectory(models.Model):
         ordering = ('company', 'name')
         verbose_name = _(u'Customer sip account')
         verbose_name_plural = _(u'Customer sip accounts')
+        indexes = [
+            PartialIndex(fields=['name', 'callerid_norm'], unique=True, where_postgresql='enabled = True'),
+            PartialIndex(fields=['name', 'callee_norm'], unique=True, where_postgresql='enabled = True'),
+            PartialIndex(fields=['name', 'callerid_norm_in'], unique=True, where_postgresql='enabled = True'),
+            PartialIndex(fields=['name', 'callee_norm_in'], unique=True, where_postgresql='enabled = True'),
+        ]
 
     def __unicode__(self):
         return "%s (%s:%s)" % (self.name, self.sip_ip, self.sip_port)
