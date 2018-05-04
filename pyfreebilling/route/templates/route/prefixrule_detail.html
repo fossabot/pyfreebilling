@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'route_prefixrule_list' %}">PrefixRule Listing</a></p>
+<table class="table">
+<tr><td>prefix</td><td>{{ object.prefix }}</td></tr>
+<tr><td>destnum_length</td><td>{{ object.destnum_length }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit PrefixRule</a>
+
+{% endblock %}

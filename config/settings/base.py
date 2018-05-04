@@ -116,6 +116,7 @@ PROJECT_APPS = (
     'pyfreebilling.endpoint.apps.EndpointConfig',
     'pyfreebilling.direction.apps.DirectionConfig',
     'pyfreebilling.rate.apps.RateConfig',
+    'pyfreebilling.route.apps.RouteConfig',
 )
 
 EXTENSION_APPS = (

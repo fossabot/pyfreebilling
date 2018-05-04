@@ -7,10 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Next]
 ### Added
 - log sip messages from kamailio into PyFreeBilling DB (acc module)
-- New coutntry / directions / prefix matching process
+- New country / directions / prefix matching process
 
 ### Changed
-- Ratecards / rates management enhanced. New a migration from old system !
+- Ratecards / rates management enhanced. Needs migration from old system !
+- Outbound routing calls management enhanced. Needs migration from old system !
+- PyFreeBilling can only use PostgreSQL as database (use of special functions)
 
 
 ### Deprecated

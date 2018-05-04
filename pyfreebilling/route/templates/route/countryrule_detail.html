@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<p><a class="btn btn-default" href="{% url 'route_countryrule_list' %}">CountryRule Listing</a></p>
+<table class="table">
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit CountryRule</a>
+
+{% endblock %}
