@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=pyfreebilling
+POSTGRES_USER=WEfnjjZvSxWNWTpAoldfLEDDHoUZHTSs
+POSTGRES_PASSWORD=pFBYrASfUA8tokR0HqinwRO28SEQOHLPKLXzeYUNdM0mSTKYir0iTFs3wsETCHzc

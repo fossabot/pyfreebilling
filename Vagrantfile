@@ -92,8 +92,8 @@ Vagrant.configure("2") do |config|
    #   vb.gui = true
    # end
 
-  config.ssh.username = "vagrant"
-  config.ssh.password = "vagrant"
+  #config.ssh.username = "vagrant"
+  #config.ssh.password = "vagrant"
   config.ssh.insert_key = false
   config.vm.boot_timeout = 240
 

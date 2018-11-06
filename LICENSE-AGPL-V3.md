@@ -1,3 +1,4 @@
+Copyright (c) 2018, Mathias WOLFF
    GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 

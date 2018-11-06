@@ -1,4 +1,10 @@
+<VirtualHost *:80>
+        # ServerName www.yourdomain.com
+        Redirect permanent / https://yourdomain.com/
+</VirtualHost>
+
 <VirtualHost *:443>
+        # ServerName www.yourdomain.com
         SSLEngine On
         SSLProtocol All -SSLv2 -SSLv3
         SSLCertificateFile /etc/ssl/private/localhost.pem
