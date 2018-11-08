@@ -68,6 +68,8 @@ target/
 .venv
 venv/
 ENV/
+.env/
+.envs/
 
 # Rope project settings
 .ropeproject
