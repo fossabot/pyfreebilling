@@ -32,12 +32,15 @@ import vatnumber
 
 from django_countries.fields import CountryField
 
+from model_utils.models import TimeStampedModel
+
 from netaddr import IPNetwork, AddrFormatError
 
 import re
 
 from .validators import validate_cidr, check_vat
 
+from pyfreebilling.route.models import RoutingGroup
 from pyfreebilling.switch.models import Domain
 
 
@@ -179,6 +182,28 @@ class Company(models.Model):
         return format_html(html, (self.id))
     balance_history.allow_tags = True
     balance_history.short_description = _(u'balance history')
+
+
+class CustomerRoutingGroup(TimeStampedModel):
+    """ Customer routing group Model """
+    company = models.ForeignKey(Company,
+                                verbose_name=_(u"company"))
+    routinggroup = models.ForeignKey(RoutingGroup,
+                                 verbose_name=_(u"routing group"))
+    description = models.CharField(
+        _(u'Comment'),
+        max_length=30,
+        blank=True)
+
+    class Meta:
+        db_table = 'customer_routinggroup'
+        app_label = 'pyfreebill'
+        ordering = ('company', 'routinggroup')
+        verbose_name = _(u'Customer Routing group Allocation')
+        verbose_name_plural = _(u'Customer routing group Allocations')
+
+    def __unicode__(self):
+        return u"%s - %s" % (self.company, self.route_routinggroup)
 
 
 class Person(models.Model):
@@ -1429,10 +1454,7 @@ class SofiaGateway(models.Model):
                                                """))
     enabled = models.BooleanField(_(u"Enabled"),
                                   default=True)
-    prefix = models.CharField(_(u'prefix'),
-                              blank=True,
-                              default='',
-                              max_length=15)
+    prefix = models.CharField(_(u'prefix'), blank=True, default='', max_length=15)
     suffix = models.CharField(_(u'suffix'),
                               blank=True,
                               default='',
@@ -1462,68 +1484,31 @@ class SofiaGateway(models.Model):
                               choices=MULTIPLE_CODECS_CHOICES,
                               help_text=_(u"""Codecs allowed - beware about
                               order, 1st has high priority """))
-    username = models.CharField(_(u"username"),
-                                blank=True,
-                                default='',
-                                max_length=35)
+    username = models.CharField(_(u"username"), blank=True, default='', max_length=35)
     password = models.CharField(_(u"password"),
                                 blank=True,
                                 default='',
                                 max_length=35)
-    register = models.BooleanField(_(u"register"),
-                                   default=False)
-    proxy = models.CharField(_(u"proxy"),
-                             max_length=48,
-                             default="",
-                             help_text=_(u"IP if register is False."))
+    register = models.BooleanField(_(u"register"), default=False)
+    proxy = models.CharField(_(u"proxy"), max_length=48, default="", help_text=_(u"IP if register is False."))
     SIP_TRANSPORT_CHOICES = (
         ("udp", _(u"UDP")),
         ("tcp", _(u"TCP")),
         ("tls", _(u"TLS")),
     )
-    transport = models.CharField(_(u"SIP transport"),
-                                 max_length=15,
-                                 default="udp",
-                                 choices=SIP_TRANSPORT_CHOICES,
-                                 help_text=_(u"Which transport to use for register"))
-    sip_port = models.PositiveIntegerField(
-        _(u"""SIP port"""),
-        default="5060",
-        help_text=_(u"""Gateway SIP port (Default 5060)."""))
+    transport = models.CharField(_(u"SIP transport"), max_length=15, default="udp", choices=SIP_TRANSPORT_CHOICES, help_text=_(u"Which transport to use for register"))
+    sip_port = models.PositiveIntegerField(_(u"SIP port), default="5060", help_text=_(u"Gateway SIP port (Default 5060)."))
     extension = models.CharField(_(u"extension number"),
                                  max_length=50,
                                  blank=True,
                                  default="",
                                  help_text=_(u"""Extension for inbound calls.
                                      Same as username, if blank."""))
-    realm = models.CharField(_(u"realm"),
-                             max_length=50,
-                             blank=True,
-                             default="",
-                             help_text=_(u"""Authentication realm. Same as
-                                 gateway name, if blank."""))
-    from_domain = models.CharField(_(u"from domain"),
-                                   max_length=50,
-                                   blank=True,
-                                   default="",
-                                   help_text=_(u"""Domain to use in from field.
-                                       Same as realm if blank."""))
-    expire_seconds = models.PositiveIntegerField(_(u"expire seconds"),
-                                                 default=3600,
-                                                 null=True)
-    retry_seconds = models.PositiveIntegerField(_(u"retry seconds"),
-                                                default=30,
-                                                null=True,
-                                                help_text=_(u"""How many
-                                                    seconds before a retry when
-                                                    a failure or timeout occurs
-                                                    """))
-    caller_id_in_from = models.BooleanField(_(u"caller ID in From field"),
-                                            default=True,
-                                            help_text=_(u"""Use the callerid of
-                                                an inbound call in the from
-                                                field on outbound calls via
-                                                this gateway."""))
+    realm = models.CharField(_(u"realm"), max_length=50, blank=True, default="", help_text=_(u"Authentication realm. Same as gateway name, if blank."))
+    from_domain = models.CharField(_(u"from domain"), max_length=50, blank=True, default="", help_text=_(u"Domain to use in from field. Same as realm if blank."))
+    expire_seconds = models.PositiveIntegerField(_(u"expire seconds"), default=3600, null=True)
+    retry_seconds = models.PositiveIntegerField(_(u"retry seconds"), default=30, null=True, help_text=_(u"How many seconds before a retry when a failure or timeout occurs"))
+    caller_id_in_from = models.BooleanField(_(u"caller ID in From field"), default=True, help_text=_(u"Use the callerid of an inbound call in the from field on outbound calls via this gateway."))
     SIP_CID_TYPE_CHOICES = (
         ('none', _(u'none')),
         ('default', _(u'default')),

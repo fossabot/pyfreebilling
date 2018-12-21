@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get upgrade -y \
   # psycopg2 dependencies
   && apt-get install -y build-essential gcc python-dev libssl-dev \
-  && apt-get install -y libpq-dev \
+  && apt-get install -y libpq-dev python-pip \
   # Pillow dependencies
   && apt-get install -y libjpeg-dev zlib1g-dev tk-dev tcl-dev \
   # CFFI dependencies
@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y \
 # Requirements have to be pulled and installed here, otherwise caching won't work
 RUN pip install pip-tools
 COPY ./requirements /requirements
-RUN pip-sync /requirements/dev.txt
+RUN pip install -r /requirements/dev.txt
 
 COPY ./compose/production/django/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r//' /entrypoint.sh
